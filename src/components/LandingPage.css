@@ -17,7 +17,7 @@ html {
 }
 
 .landing-page {
-  background-color: #faf4e7;
+  background-color: #F6F4F0;
   color: #000000;
   min-height: 200vh;
   position: relative;
@@ -46,6 +46,7 @@ figure {
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 2px solid #79D7BE;
 }
 
 figure img {
@@ -101,4 +102,5 @@ figure:hover img {
 
 .squiggle path {
   stroke-width: 0.5rem;
+  stroke: #4DA1A9;
 } 

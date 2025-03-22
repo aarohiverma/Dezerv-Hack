@@ -9,7 +9,7 @@ footer {
   align-items: center;
   justify-content: space-between;
   font-size: 0.675rem;
-  background-color: rgba(250, 244, 231, 0.9);
+  background-color: rgba(246, 244, 240, 0.9);
   backdrop-filter: blur(8px);
   opacity: 0;
   transform: translateY(100%);
@@ -29,14 +29,14 @@ footer nav {
 footer a {
   color: currentColor;
   text-decoration: underline;
-  text-decoration-color: #cd3c2f;
+  text-decoration-color: #2E5077;
   text-underline-offset: 4px;
   transition: text-decoration-color 0.3s ease;
   font-weight: 500;
 }
 
 footer a:hover {
-  text-decoration-color: #000000;
+  text-decoration-color: #4DA1A9;
 }
 
 .credits {
