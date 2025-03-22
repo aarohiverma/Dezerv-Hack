@@ -1,7 +1,7 @@
 /* Overall dashboard layout */
-body {
-    font-family: 'Poppins',Arial,sans-serif; /* Example fonts */
-}
+/* body {
+    font-family: 'Poppins',Arial,sans-serif; /* Example fonts 
+} */
 
 .dashboard {
     display: flex;
