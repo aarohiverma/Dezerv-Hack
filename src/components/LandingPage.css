@@ -104,3 +104,34 @@ figure:hover img {
   stroke-width: 0.5rem;
   stroke: #4DA1A9;
 } 
+
+/* Container for the dashboard button */
+.dashboard-button-container {
+  text-align: center;
+  margin: 3rem 0;
+}
+
+/* Dashboard button styling */
+.dashboard-button {
+  background-color: #2E5077;
+  color: white;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  font-family: 'Poppins', Arial, sans-serif;
+}
+
+/* Hover effect */
+.dashboard-button:hover {
+  background-color: #4DA1A9;
+  transform: scale(1.05);
+}
+
+/* Button animation when clicked */
+.dashboard-button:active {
+  transform: scale(0.98);
+}
