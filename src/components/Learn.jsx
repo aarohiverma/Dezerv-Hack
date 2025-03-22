@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import './Learn.css';
 import Footer from './Footer';
 
 function Learn() {
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [targetAmount, setTargetAmount] = useState('');
+  const [monthly20, setMonthly20] = useState(0);
+  const [total20, setTotal20] = useState(0);
+  const [monthly35, setMonthly35] = useState(0);
+  const [total35, setTotal35] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,19 +24,39 @@ function Learn() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [hasScrolled]);
 
+  const handleAmountChange = (e) => {
+    const value = e.target.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+    setTargetAmount(value);
+    
+    if (value) {
+      const numValue = parseFloat(value);
+      setMonthly20(numValue * 0.00001509136);
+      setTotal20(numValue * 0.0081493344);
+      setMonthly35(numValue * 0.000142657);
+      setTotal35(numValue * 0.07703478);
+    } else {
+      setMonthly20(0);
+      setTotal20(0);
+      setMonthly35(0);
+      setTotal35(0);
+    }
+  };
+
+  // Format number with commas
+  const formatNumber = (num) => {
+    return num.toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  };
+
   return (
     <div className="learn-page">
       <header className={`main-header ${hasScrolled ? 'scrolled' : ''}`}>
-        <Link to="/" className="header-link">
-          <h1>SmartInvest</h1>
-        </Link>
-        <nav className="header-nav">
-          <Link to="/learn" className="nav-link">Learn</Link>
-          <Link to="/login" className="nav-link">Login</Link>
-        </nav>
+        <h1>SmartInvest</h1>
       </header>
       
-      <main className="learn-content">
+      <div className="learn-content">
         <h2 className="learn-title">Why to Invest?</h2>
         
         <div className="intro-section">
@@ -145,7 +169,38 @@ function Learn() {
             Starting early is like giving your money a head start in a marathon. Even small amounts invested in your youth can grow into substantial sums by the time you're older. This is because compounding works best over long periods.
           </p>
         </div>
-      </main>
+
+        <div className="calculator-section">
+          <h2>How much do you want to save up till 65?</h2>
+          <div className="input-container">
+            <input 
+              type="text" 
+              value={targetAmount ? `₹${parseInt(targetAmount).toLocaleString()}` : ''}
+              onChange={handleAmountChange}
+              placeholder="Enter your target amount"
+              className="target-input"
+            />
+          </div>
+          
+          <div className="comparison-container">
+            <div className="comparison-box">
+              <h3>If I start investing at 20</h3>
+              <div className="calculation-result">
+                <p>Monthly investment: ₹{formatNumber(monthly20)}</p>
+                <p>Total Investment: ₹{formatNumber(total20)}</p>
+              </div>
+            </div>
+            
+            <div className="comparison-box">
+              <h3>If I start investing at 35</h3>
+              <div className="calculation-result">
+                <p>Monthly investment: ₹{formatNumber(monthly35)}</p>
+                <p>Total Investment: ₹{formatNumber(total35)}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <Footer hasScrolled={hasScrolled} />
     </div>
   );
