@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import Header from './Header';
+import Footer from './Footer';
 import './LandingPage.css';
 
 function LandingPage() {
@@ -29,9 +31,7 @@ function LandingPage() {
 
   return (
     <div className={`landing-page ${hasScrolled ? 'scrolled' : ''}`}>
-      <header className="main-header">
-        <h1>SmartInvest</h1>
-      </header>
+      <Header hasScrolled={hasScrolled} />
 
       <section>
         <figure className="pos1">
@@ -55,17 +55,7 @@ function LandingPage() {
         </figure>
       </section>
 
-      <footer>
-        <nav>
-          <a href="#">Learn</a>
-          <a href="#">Invest</a>
-          <a href="#">About</a>
-        </nav>
-
-        <div className="credits">
-          made with <span className="heart">💜</span> by mathGang
-        </div>
-      </footer>
+      <Footer hasScrolled={hasScrolled} />
 
       <svg
         ref={svgRef}
