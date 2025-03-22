@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './Learn.css';
 import Footer from './Footer';
 
@@ -22,10 +23,16 @@ function Learn() {
   return (
     <div className="learn-page">
       <header className={`main-header ${hasScrolled ? 'scrolled' : ''}`}>
-        <h1>SmartInvest</h1>
+        <Link to="/" className="header-link">
+          <h1>SmartInvest</h1>
+        </Link>
+        <nav className="header-nav">
+          <Link to="/learn" className="nav-link">Learn</Link>
+          <Link to="/login" className="nav-link">Login</Link>
+        </nav>
       </header>
       
-      <div className="learn-content">
+      <main className="learn-content">
         <h2 className="learn-title">Why to Invest?</h2>
         
         <div className="intro-section">
@@ -138,7 +145,7 @@ function Learn() {
             Starting early is like giving your money a head start in a marathon. Even small amounts invested in your youth can grow into substantial sums by the time you're older. This is because compounding works best over long periods.
           </p>
         </div>
-      </div>
+      </main>
       <Footer hasScrolled={hasScrolled} />
     </div>
   );

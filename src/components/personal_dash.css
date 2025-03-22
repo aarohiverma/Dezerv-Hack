@@ -1,0 +1,170 @@
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #f8f9fa !important;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+.dashboard {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: auto;
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 300px;
+    min-width: 250px;
+    background: linear-gradient(to bottom, #2E5077, #4DA1A9);
+    color: white;
+    padding: 25px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 10px 10px 0;
+}
+
+.sidebar h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    font-size: 20px;
+    margin: 15px 0;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.sidebar li:hover {
+    color: #ffd1d1;
+}
+
+/* Dashboard Button */
+.dashboard-button {
+    background-color: #2E5077;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.dashboard-button:hover {
+    background-color: #0056b3;
+}
+
+/* Main content area */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    color: #27272d;
+}
+
+/* Welcome message */
+.welcome-message {
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Updated User Details Section (Matches Group Styling) */
+.user-details {
+    display: flex;
+    align-items: center;
+    background: #2E5077; /* Same as leaderboard */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    margin-bottom: 20px;
+    
+}
+
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 20px;
+    border: 3px solid #2E5077; /* Profile pic border */
+}
+
+.user-info h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #ffffff; /* Match sidebar text */
+}
+
+.user-info p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+.investment-amount {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #2f89cd;
+}
+
+/* Investment Table */
+.investment-table-container {
+    width: 80%;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: 400px;
+}
+.investment-table-container-text{
+    font-size: 25px;
+}
+
+.investment-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.investment-table th,
+.investment-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.investment-table th {
+    background-color: #2E5077;
+    color: white;
+}
+
+.investment-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Percentage Change Styling */
+.positive {
+    color: green;
+    font-weight: bold;
+}
+
+.negative {
+    color: red;
+    font-weight: bold;
+}

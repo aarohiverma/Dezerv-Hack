@@ -1,0 +1,237 @@
+/* Overall dashboard layout */
+body {
+    font-family: 'Poppins',Arial,sans-serif; /* Example fonts */
+}
+
+.dashboard {
+    display: flex;
+    height: 100vh;
+    width: 100vw; /* Ensure full width */
+    background-color:  #f8f9fa !important ; /* White background */
+    font-size: 14px; /* Smaller font for overall dashboard */
+    overflow: auto; /* Prevent scrolling issues */
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 300px; /* Keep existing width */
+    min-width: 250px;
+    background: linear-gradient(to bottom, #2E5077, #4DA1A9); /* Gradient background */
+    color: white;
+    padding: 25px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 10px 10px 0; /* Optional: rounded edges */
+}
+
+/* Sidebar Header */
+.sidebar h2 {
+    font-size: 40px; /* Larger heading */
+    margin-bottom: 20px;
+}
+
+/* Sidebar Menu */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    font-size: 20px; /* Bigger menu items */
+    margin: 15px 0;
+    cursor: pointer;
+    transition: color 0.3s;
+    /* font: */
+}
+
+.sidebar li:hover {
+    color: #ffd1d1;
+}
+
+/* Main content area */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center elements */
+    justify-content: flex-start;
+    width: 100%;
+    color: #27272d;
+}
+
+/* Welcome message */
+.welcome-message {
+    font-size: 1.8rem; /* Slightly bigger */
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Charts Container */
+.charts-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 20px;
+    flex-wrap: wrap; /* Ensures responsiveness */
+}
+
+/* Individual Chart Styling */
+.chart {
+    text-align: center;
+    margin: 10px;
+}
+
+/* Leaderboard Container */
+.leaderboard-container {
+    width: 350px; /* Increased width */
+    background: #f8f9fa; /* Light background */
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.1);
+    margin-left: 25px; /* Space from content */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Leaderboard Header */
+.leaderboard-container h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #2f89cd;
+}
+
+/* Leaderboard List */
+.leaderboard-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Leaderboard Entry */
+.leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.leaderboard-item:hover {
+    transform: scale(1.05);
+}
+
+/* Name & Last Trade */
+.leaderboard-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.leaderboard-name {
+    font-size: 16px; /* Increased font size */
+    font-weight: 600;
+    color: #333;
+}
+
+.leaderboard-trade {
+    font-size: 14px;
+    color: #777;
+}
+
+/* Profit Badge */
+.profit-badge {
+    font-size: 14px; /* Bigger text */
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 12px;
+    background-color: #2f89cd;
+    color: white;
+}
+
+/* Investment Movement Graph */
+.graph-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    text-align: center;
+    width: calc(100% - 40px); /* Full width minus padding */
+    max-width: 900px; /* Prevents it from stretching too much */
+  }
+
+  .chatroom-container {
+    background: white;
+    padding: 15px;
+    width: 375px; /* Match leaderboard width */
+    border-radius: 15px;
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.1);
+    margin-left: 25px; /* Same spacing as leaderboard */
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-messages {
+    height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.chat-message {
+    background:  #2E5077;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+   width: fit-content;
+   
+}
+
+.chat-input-container {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color:#ffff  ;
+    color: black;
+}
+
+.chat-send {
+    background: #2E5077;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+
+.chat-send:hover {
+    background: #0056b3;
+}
+
+/* Adjust positioning to align with leaderboard */
+.sidebar + .leaderboard-chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between leaderboard and chatroom */
+}
