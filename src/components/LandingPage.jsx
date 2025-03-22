@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom'; // ✅ Import Link for navigation
 import Header from './Header';
 import Footer from './Footer';
 import './LandingPage.css';
@@ -23,7 +24,6 @@ function LandingPage() {
       }
     };
 
-    // Initial call to set initial state
     handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -55,6 +55,13 @@ function LandingPage() {
         </figure>
       </section>
 
+      {/* ✅ Add button to navigate to Group Dashboard */}
+      <div className="dashboard-button-container">
+        <Link to="/grp_dash">
+          <button className="dashboard-button">Go to Group Dashboard</button>
+        </Link>
+      </div>
+
       <Footer hasScrolled={hasScrolled} />
 
       <svg
@@ -79,4 +86,4 @@ function LandingPage() {
   );
 }
 
-export default LandingPage; 
+export default LandingPage;
