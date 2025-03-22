@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend, LineChart, Line, XAxis, YAxis, ResponsiveContainer } from "recharts";
 import "./grp_dash.css";
-
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 const Dashboard = () => {
   // Dummy data for pie charts
   const [data] = useState({
@@ -18,16 +20,28 @@ const Dashboard = () => {
       { name: "Remaining", value: 8000 },
     ],
   });
+  const {group_name}=useParams()
+  const fetchLeaderboardData = async () => {
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/game/leaderboard/${group_name}`);
+      setLeaderboard(response.data);
+      console.log(response.data)
+    } catch (err) {
+      
+      console.error("Error fetching leaderboard:", err);
+    }
+  };
 
+  const [leaderboard, setLeaderboard]=useState([]);
+  useEffect(()=>{
+
+    fetchLeaderboardData()
+    console.log(leaderboard)
+  },[group_name])
   // Leaderboard Data (Sorted by Profit)
-  const leaderboardData = [
-    { name: "Alice", lastTrade: "2025-03-20", profit: 4500 },
-    { name: "Bob", lastTrade: "2025-03-18", profit: 3200 },
-    { name: "Charlie", lastTrade: "2025-03-19", profit: 2800 },
-    { name: "David", lastTrade: "2025-03-21", profit: 2200 },
-    { name: "Eve", lastTrade: "2025-03-15", profit: 1500 },
-  ].sort((a, b) => b.profit - a.profit);
-
+  const leaderboardData = leaderboard
+  .slice() // Create a shallow copy to avoid mutating state
+  .sort((a, b) => b.portfolio_value - a.portfolio_value);
   const COLORS = ["#0088FE", "#FFBB28"]; // Blue for main, yellow for remaining
 
   // Dummy investment data (Last 5 Trades)
@@ -147,8 +161,8 @@ const Dashboard = () => {
               <li key={index} className="leaderboard-item">
                 <div className="leaderboard-rank">#{index + 1}</div>
                 <div className="leaderboard-info">
-                  <span className="leaderboard-name">{entry.name}</span>
-                  <span className="leaderboard-trade">Last Trade: {entry.lastTrade}</span>
+                  <span className="leaderboard-name">{entry.user}</span>
+                  <span className="leaderboard-trade">Portfolio Value: {entry.portfolio_value}</span>
                 </div>
                 <span className="profit-badge">${entry.profit}</span>
               </li>
