@@ -1,43 +1,72 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './grp_total_dash.css';
 
 const GrpDash = () => {
     const navigate = useNavigate();
+    const user_id = localStorage.getItem('user_id');
     const [groupName, setGroupName] = useState('');
-    const [groupId, setGroupId] = useState('');
-    const [groups, setGroups] = useState([]); // Initially empty
+    const [joinGroupName, setJoinGroupName] = useState('');
+    const [groups, setGroups] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`http://127.0.0.1:8000/game/get_groups/${user_id}`);
+                setGroups(response.data);
+            } catch (err) {
+                setErrorMessage(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [user_id]);
 
     const handleCreateGroup = async () => {
-        if (groupName.trim() !== '') {
+        if (groupName.trim() !== "") {
             try {
-                const response = await axios.post('http://127.0.0.1:8000/game/create_group/', { group_name: groupName });
+                const response = await axios.post("http://127.0.0.1:8000/game/create_group/", {
+                    group_name: groupName,
+                    user_id: user_id,
+                });
                 if (response.status === 201) {
-                    const newGroup = { id: response.data.group_id, name: groupName };
-                    setGroups([...groups, newGroup]); // Add group if success
-                    setErrorMessage('');
+                    const newGroup = {
+                        group_id: response.data.group_id,
+                        group_name: response.data.group_name,
+                        current_balance: 0
+                    };
+                    setGroups([...groups, newGroup]);
+                    setGroupName("");
+                    setErrorMessage("");
                 } else {
-                    setErrorMessage('Failed to create group. Try again.');
+                    setErrorMessage("Failed to create group. Try again.");
                 }
             } catch (error) {
-                setErrorMessage('Error creating group: ' + (error.response?.data?.error || 'Server error'));
+                setErrorMessage("Error creating group: " + (error.response?.data?.error || "Server error"));
             }
         }
     };
 
     const handleJoinGroup = async () => {
-        if (groupId.trim() !== '') {
+        if (joinGroupName.trim() !== '') {
             try {
-                const response = await axios.post('http://127.0.0.1:8000/game/join_group/', { group_id: groupId });
-                if (response.status === 200) {
-                    const newGroup = { id: groupId, name: `Group ${groupId}` };
-                    setGroups([...groups, newGroup]); // Add joined group if success
-                    setGroupId('');
+                const response = await axios.post('http://127.0.0.1:8000/game/join_group/', {
+                    user_id: user_id,
+                    group_name: joinGroupName
+                });
+                if (response.status === 201) {
+                    // Refresh the groups list after joining
+                    const updatedResponse = await axios.get(`http://127.0.0.1:8000/game/get_groups/${user_id}`);
+                    setGroups(updatedResponse.data);
+                    setJoinGroupName('');
                     setErrorMessage('');
                 } else {
-                    setErrorMessage('Failed to join group. Check ID.');
+                    setErrorMessage('Failed to join group. Check group name.');
                 }
             } catch (error) {
                 setErrorMessage('Error joining group: ' + (error.response?.data?.error || 'Server error'));
@@ -55,8 +84,8 @@ const GrpDash = () => {
                 ) : (
                     <ul>
                         {groups.map((group) => (
-                            <li key={group.id}>
-                                <button className="group-button">{group.name}</button>
+                            <li key={group.group_id}>
+                                <button className="group-button">{group.group_name}</button>
                             </li>
                         ))}
                     </ul>
@@ -75,9 +104,9 @@ const GrpDash = () => {
                         <p>No groups available. Create or join one to get started.</p>
                     ) : (
                         groups.map((group) => (
-                            <div className="group-card" key={group.id}>
-                                <h2>{group.name}</h2>
-                                <p>Description of {group.name}</p>
+                            <div className="group-card" key={group.group_id}>
+                                <h2>{group.group_name}</h2>
+                              
                             </div>
                         ))
                     )}
@@ -95,14 +124,14 @@ const GrpDash = () => {
                     <button onClick={handleCreateGroup}>Create</button>
                 </div>
 
-                {/* Join Group by ID */}
+                {/* Join Group */}
                 <div className="group-action">
-                    <h3>Join a Group by ID</h3>
+                    <h3>Join a Group</h3>
                     <input 
                         type="text" 
-                        placeholder="Enter group ID" 
-                        value={groupId} 
-                        onChange={(e) => setGroupId(e.target.value)} 
+                        placeholder="Enter group name" 
+                        value={joinGroupName} 
+                        onChange={(e) => setJoinGroupName(e.target.value)} 
                     />
                     <button onClick={handleJoinGroup}>Join</button>
                 </div>
